@@ -11,6 +11,7 @@ read -a PARTITIONS <<< "$PARTITIONS"
 BOOT_PARTITION="/dev/${PARTITIONS[0]}"
 BTRFS_PARTITION="/dev/${PARTITIONS[1]}"
 
+sleep 2s
 mkfs.fat -F 32 ${BOOT_PARTITION}
 mkfs.btrfs ${BTRFS_PARTITION}
 
@@ -41,8 +42,15 @@ mount ${BOOT_PARTITION} /mnt/boot
 
 btrfs filesystem mkswapfile --size 8g --uuid clear /mnt/swap/swapfile
 
-git clone git@github.com:lazarnerd/.dotfiles.git /mnt/home/nerd/.dotfiles
-nixos-generate-config --root /mnt --show-hardware-config > /mnt/home/nerd/.dotfiles/nix/hosts/default/hardware-configuration.nix
+git clone https://github.com/lazarnerd/.dotfiles.git /mnt/home/nerd/.dotfiles
+rm -rf /mnt/home/nerd/.dotfiles/.git
+
+nixos-generate-config --root /mnt --show-hardware-config > /hardware-configuration.nix
+cp /hardware-configuration.nix /mnt/home/nerd/.dotfiles/nix/hosts/default/
 sudo chown -R 1000:100 /mnt/home/nerd
 
 nixos-install --root /mnt --flake /mnt/home/nerd/.dotfiles/nix
+
+rm -rf /mnt/home/nerd/.dotfiles
+git clone https://github.com/lazarnerd/.dotfiles.git /mnt/home/nerd/.dotfiles
+cp /hardware-configuration.nix /mnt/home/nerd/.dotfiles/nix/hosts/default/
