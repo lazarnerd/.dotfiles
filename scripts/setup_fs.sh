@@ -49,7 +49,7 @@ nixos-generate-config --root /mnt --show-hardware-config > /hardware-configurati
 cp /hardware-configuration.nix /mnt/home/nerd/.dotfiles/nix/hosts/default/
 sudo chown -R 1000:100 /mnt/home/nerd
 
-nixos-install --root /mnt --flake /mnt/home/nerd/.dotfiles/nix
+nixos-install --root /mnt --flake /mnt/home/nerd/.dotfiles/nix#nixos
 
 rm -rf /mnt/home/nerd/.dotfiles
 git clone https://github.com/lazarnerd/.dotfiles.git /mnt/home/nerd/.dotfiles
