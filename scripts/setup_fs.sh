@@ -13,7 +13,7 @@ BTRFS_PARTITION="/dev/${PARTITIONS[1]}"
 
 sleep 2s
 mkfs.fat -F 32 ${BOOT_PARTITION}
-mkfs.btrfs ${BTRFS_PARTITION}
+mkfs.btrfs -f ${BTRFS_PARTITION}
 
 mkdir -p /mnt
 mount ${BTRFS_PARTITION} /mnt
