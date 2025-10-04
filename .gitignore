@@ -1,1 +1,3 @@
-
+# ignore all files in .ssh except .ssh/.gitignore
+.ssh/*
+!.ssh/.gitkeep

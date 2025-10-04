@@ -3,7 +3,7 @@
     disk = {
       main = {
         type = "disk";
-        device = "/dev/disk/by-diskseq/1";
+        device = "/dev/nvme0n1";
         content = {
           type = "gpt";
           partitions = {
@@ -37,6 +37,18 @@
                   "/nixos/nix" = {
                     mountpoint = "/nix";
                     mountOptions = ["subvol=nixos/nix" "compress=zstd" "noatime"];
+                  };
+                  "/workspaces" = {
+                    mountpoint = "/home/nerd/workspaces";
+                    mountOptions = ["subvol=workspaces" "compress=zstd" "noatime"];
+                  };
+                  "/ssh" = {
+                    mountpoint = "/home/nerd/.ssh";
+                    mountOptions = ["subvol=ssh" "compress=zstd" "noatime"];
+                  };
+                  "/downloads" = {
+                    mountpoint = "/home/nerd/Downloads";
+                    mountOptions = ["subvol=downloads" "compress=zstd" "noatime"];
                   };
                   "/swap" = {
                     mountpoint = "/swap";
