@@ -6,14 +6,9 @@
 
 {
   imports =
-    [ # Include the results of the hardware scan.
-      ./secrets.nix
+    [
       ./hardware-configuration.nix
-      ../../modules/git.nix
-      (fetchTarball "https://github.com/nix-community/nixos-vscode-server/tarball/master")
     ];
-
-  services.vscode-server.enable = true;
 
   # Use the systemd-boot EFI boot loader.
   #boot.loader.systemd-boot.enable = true;
